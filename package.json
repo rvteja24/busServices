@@ -1,0 +1,19 @@
+{
+  "name": "bus_services",
+  "version": "1.0.0",
+  "description": "bus services",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "global-tunnel-ng": "^2.7.1",
+    "mongodb": "^3.5.5",
+    "mongoose": "^5.9.6"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "vijaya teja rayavarapu",
+  "license": "ISC"
+}
