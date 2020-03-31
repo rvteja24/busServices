@@ -16,5 +16,12 @@ client.connect(err =>{
         });
 
     };
+
+    var adminDoc = {userName: "admin1", password: "serviceAdmin1!", api_key: "L7g6TRuVjeQAlPJhLyEI" };
+
+    // client.db(config.databaseName).collection(config.securityCollection).insertOne( adminDoc, function(err, result){
+    //     if (err) throw err;
+    //     console.log(result);
+    // });
     //client.close();
 });
