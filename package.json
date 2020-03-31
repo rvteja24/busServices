@@ -4,10 +4,13 @@
   "description": "bus services",
   "main": "server.js",
   "dependencies": {
+    "email-validator": "^2.0.4",
     "express": "^4.17.1",
     "global-tunnel-ng": "^2.7.1",
+    "log-to-file": "^2.0.2",
     "mongodb": "^3.5.5",
-    "mongoose": "^5.9.6"
+    "mongoose": "^5.9.6",
+    "validate-phone-number-node-js": "0.0.1"
   },
   "devDependencies": {},
   "scripts": {
