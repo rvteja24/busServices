@@ -12,7 +12,7 @@ app.get(pathToV1APIs + '/getAllOpenTickets', ticketController.getAllOpenTickets)
 //get ticket information based on seat number
 app.get(pathToV1APIs + '/getTicketInfo', ticketController.getTicketinfo)
 //update ticket info with given parameters
-//app.put(pathToV1APIs + '/updateTicketInfo', ticketController.updateTicketInfo)
+app.patch(pathToV1APIs + '/updateTicketInfo', ticketController.updateTicketInfo)
 //----admin only functionality---- open up all the tickets
 app.put(pathToV1APIs + '/openAllTickets', ticketController.openAllTickets)
 }
