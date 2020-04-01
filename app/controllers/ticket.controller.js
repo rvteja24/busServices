@@ -74,6 +74,7 @@ exports.getAllClosedTickets = (req, res) => {
                             if (err) throw err;
                             if (result.length > 0) {
                                 //console.log(result)
+                                delete result._id;
                                 res.send(result);
                             }
                             else {
@@ -117,6 +118,7 @@ exports.getAllOpenTickets = (req, res) => {
                             if (err) throw err;
                             if (result.length > 0) {
                                 //console.log(result)
+                                delete result._id;
                                 res.send(result);
                             }
                             else {

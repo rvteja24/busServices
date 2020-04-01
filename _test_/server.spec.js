@@ -28,8 +28,14 @@ beforeAll(async () => {
 });
 
 afterAll(async () => {
-
-})
+  const client = new MongoClient(config.uri, config.options);
+  client.connect(err => {
+    if (err) throw err;
+    client.db(config.databaseName).collection(config.collectionName).drop(() => {
+      client.close();
+    })
+  });
+});
 
 
 describe("GET / ", () => {
@@ -48,7 +54,6 @@ describe("GET /api/v1/getAllClosedTickets ", () => {
   test("It should respond with all the closed tickets", async () => {
     const response = await request(server).get("/api/v1/getAllClosedTickets").set("api-key", "L7g6TRuVjeQAlPJhLyEI");
     expect(response.statusCode).toBe(200);
-    console.log(response.body);
     expect(response.body[0].ticketStatus).toBe("CLOSED");
   });
 });
@@ -133,42 +138,42 @@ describe("PATCH /api/v1/updateTicketInfo ", () => {
   });
 
   test("It should respond with 400 bad request and error message for seat number missing", async () => {
-    const response = await request(server).patch("/api/v1/updateTicketInfo").set("api-key", "L7g6TRuVjeQAlPJhLyEI").send({"passengerAge": 25});
+    const response = await request(server).patch("/api/v1/updateTicketInfo").set("api-key", "L7g6TRuVjeQAlPJhLyEI").send({ "passengerAge": 25 });
     expect(response.statusCode).toBe(400);
     expect(response.body.errorMessage).toBe("Please check the request body and try again. seatNumber field is mandatory for updating ticket information");
 
   });
 
   test("It should respond with 400 bad request and error message for invalid email id", async () => {
-    const response = await request(server).patch("/api/v1/updateTicketInfo").set("api-key", "L7g6TRuVjeQAlPJhLyEI").send({"seatNumber": 25, "emailId":"abc"});
+    const response = await request(server).patch("/api/v1/updateTicketInfo").set("api-key", "L7g6TRuVjeQAlPJhLyEI").send({ "seatNumber": 25, "emailId": "abc" });
     expect(response.statusCode).toBe(400);
     expect(response.body.errorMessage).toBe("Please check the emailId format");
 
   });
-  
+
   test("It should respond with 400 bad request and error message for invalid phone number", async () => {
-    const response = await request(server).patch("/api/v1/updateTicketInfo").set("api-key", "L7g6TRuVjeQAlPJhLyEI").send({"seatNumber": 25, "phoneNumber":"abc"});
+    const response = await request(server).patch("/api/v1/updateTicketInfo").set("api-key", "L7g6TRuVjeQAlPJhLyEI").send({ "seatNumber": 25, "phoneNumber": "abc" });
     expect(response.statusCode).toBe(400);
     expect(response.body.errorMessage).toBe("Please check the phone number format");
 
   });
 
   test("It should respond with 400 bad request and error message for invalid seat number", async () => {
-    const response = await request(server).patch("/api/v1/updateTicketInfo").set("api-key", "L7g6TRuVjeQAlPJhLyEI").send({"seatNumber": 70});
+    const response = await request(server).patch("/api/v1/updateTicketInfo").set("api-key", "L7g6TRuVjeQAlPJhLyEI").send({ "seatNumber": 70 });
     expect(response.statusCode).toBe(400);
     expect(response.body.errorMessage).toBe("Please check the seat number");
 
   });
 
   test("It should respond with 400 bad request and error message for invalid ticket status", async () => {
-    const response = await request(server).patch("/api/v1/updateTicketInfo").set("api-key", "L7g6TRuVjeQAlPJhLyEI").send({"seatNumber": 20, "ticketStatus": "abcd"});
+    const response = await request(server).patch("/api/v1/updateTicketInfo").set("api-key", "L7g6TRuVjeQAlPJhLyEI").send({ "seatNumber": 20, "ticketStatus": "abcd" });
     expect(response.statusCode).toBe(400);
     expect(response.body.errorMessage).toBe("Please check the ticket status format, if the attribute is present it should be CLOSED/OPEN");
 
   });
 
   test("It should respond with status code 200 and success message for valid request", async () => {
-    const response = await request(server).patch("/api/v1/updateTicketInfo").set("api-key", "L7g6TRuVjeQAlPJhLyEI").send({"seatNumber": 10, "passengerName":"John DOEE"});
+    const response = await request(server).patch("/api/v1/updateTicketInfo").set("api-key", "L7g6TRuVjeQAlPJhLyEI").send({ "seatNumber": 10, "passengerName": "John DOEE" });
     expect(response.statusCode).toBe(200);
     expect(response.body.message).toBe("Ticket updated successfully");
 
@@ -187,12 +192,12 @@ describe("PUT /api/v1/openAllTickets ", () => {
   });
 
   test("It should respond with 401 unauthorized since credentials are invalid", async () => {
-    const response = await request(server).put("/api/v1/openAllTickets").set("api-key", "L7g6TRuVjeQAlPJhLyEI").send({"username":"admin2", "password": "abcdef"});
+    const response = await request(server).put("/api/v1/openAllTickets").set("api-key", "L7g6TRuVjeQAlPJhLyEI").send({ "username": "admin2", "password": "abcdef" });
     expect(response.statusCode).toBe(401);
   });
 
   test("It should respond with status 200 and success message in response body", async () => {
-    const response = await request(server).put("/api/v1/openAllTickets").set("api-key", "L7g6TRuVjeQAlPJhLyEI").send({"username":"admin1", "password": "serviceAdmin1!"});
+    const response = await request(server).put("/api/v1/openAllTickets").set("api-key", "L7g6TRuVjeQAlPJhLyEI").send({ "username": "admin1", "password": "serviceAdmin1!" });
     expect(response.statusCode).toBe(200);
     expect(response.body.message).toBe("Successfully opened all the tickets");
   });
