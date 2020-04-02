@@ -261,7 +261,7 @@ exports.updateTicketInfo = (req, res) => {
             dbo.collection(config.securityCollection).findOne({ api_key: apiKey }, function (err, result) {
                 if (result != null) {
                     if (req.body != null && req.body.seatNumber != null) {
-                        if (req.body.ticketStatus != null && (req.body.ticketStatus.toUpperCase() != "CLOSED" || req.body.ticketStatus.toUpperCase() != "OPEN")) {
+                        if (req.body.ticketStatus != null && (req.body.ticketStatus.toUpperCase() != "CLOSED" && req.body.ticketStatus.toUpperCase() != "OPEN")) {
                             res.status(400);
                             res.send({ "errorMessage": "Please check the ticket status format, if the attribute is present it should be CLOSED/OPEN", "statusCode": 400 });
                         }
