@@ -1,0 +1,190 @@
+{
+	"variables": [],
+	"info": {
+		"name": "BusServices",
+		"_postman_id": "e05c4752-fbe1-7613-6981-79ce75256312",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get API Details",
+			"request": {
+				"url": "http://ec2-18-222-161-231.us-east-2.compute.amazonaws.com:3000/",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Get basic API details"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Ticket Info",
+			"request": {
+				"url": {
+					"raw": "http://ec2-18-222-161-231.us-east-2.compute.amazonaws.com:3000/api/v1/getTicketInfo?seatNumber=29",
+					"protocol": "http",
+					"host": [
+						"ec2-18-222-161-231",
+						"us-east-2",
+						"compute",
+						"amazonaws",
+						"com"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"getTicketInfo"
+					],
+					"query": [
+						{
+							"key": "seatNumber",
+							"value": "29",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "api-key",
+						"value": "L7g6TRuVjeQAlPJhLyEI",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": "Get the status of the ticket using seat number"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Ticket Status",
+			"request": {
+				"url": {
+					"raw": "http://ec2-18-222-161-231.us-east-2.compute.amazonaws.com:3000/api/v1/getTicketStatus?seatNumber=2",
+					"protocol": "http",
+					"host": [
+						"ec2-18-222-161-231",
+						"us-east-2",
+						"compute",
+						"amazonaws",
+						"com"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"getTicketStatus"
+					],
+					"query": [
+						{
+							"key": "seatNumber",
+							"value": "2",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "api-key",
+						"value": "L7g6TRuVjeQAlPJhLyEI",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": "Get the status of the ticket using seat number"
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Closed Tickets",
+			"request": {
+				"url": "http://ec2-18-222-161-231.us-east-2.compute.amazonaws.com:3000/api/v1/getAllClosedTickets",
+				"method": "GET",
+				"header": [
+					{
+						"key": "api-key",
+						"value": "L7g6TRuVjeQAlPJhLyEI",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": "Get all the closed tickets"
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Open Tickets",
+			"request": {
+				"url": "http://ec2-18-222-161-231.us-east-2.compute.amazonaws.com:3000/api/v1/getAllOpenTickets",
+				"method": "GET",
+				"header": [
+					{
+						"key": "api-key",
+						"value": "L7g6TRuVjeQAlPJhLyEI",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": "Get all the closed tickets"
+			},
+			"response": []
+		},
+		{
+			"name": "Update ticket info",
+			"request": {
+				"url": "http://ec2-18-222-161-231.us-east-2.compute.amazonaws.com:3000/api/v1/updateTicketInfo",
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "api-key",
+						"value": "L7g6TRuVjeQAlPJhLyEI",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"seatNumber\": 2,\n\t\"passengerName\": \"test\",\n\t\"passengerAge\": 25,\n\t\"emailId\": \"abc@test.com\",\n\t\"phoneNumber\": 9988554477,\n\t\"ticketStatus\": \"closed\",\n\t\"passengerGender\": \"M\"\n}"
+				},
+				"description": "update the ticket info"
+			},
+			"response": []
+		},
+		{
+			"name": "Open Up All tickets",
+			"request": {
+				"url": "http://ec2-18-222-161-231.us-east-2.compute.amazonaws.com:3000/api/v1/openAllTickets",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "api-key",
+						"value": "L7g6TRuVjeQAlPJhLyEI",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"admin1\",\n\t\"password\":\"serviceAdmin1!\"\n}"
+				},
+				"description": "admin only function to open up all the tickets"
+			},
+			"response": []
+		}
+	]
+}
