@@ -10,7 +10,8 @@ app.use(bodyParser.urlencoded({ extended: true }))
 // parse application/json
 app.use(bodyParser.json())
 
-app.get('/', (req, res) => res.send('Bus ticketing service APIs'));
+app.get('/', (req, res) => res.send({"name": "busTicketingService", "version": "1.0.0"}));
 require('./app/routes/routes')(app);
-app.listen(port, () => console.log(`Bus services listening on port ${port}!`))
+const server = app.listen(port, () => console.log(`Bus services listening on port ${port}!`))
 
+module.exports = server;
