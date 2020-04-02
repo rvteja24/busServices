@@ -11,9 +11,9 @@ Run 'npm install' from the project root directory to install all the node depend
 
 Run 'node mongoDbSetup/mongoTicketsCollectionSetup.js' from the project root directory to setup dummy data in the mongodb for the first time.
 
-Run 'node server.js' from the project root folder to start the node.js instance.
+Run 'node server.js' or 'npm start' from the project root folder to start the node.js instance.
 
-Navigate to localhost:8000 and use the below mentioned end points for the apis:
+Navigate to localhost:3000 and use the below mentioned end points for the apis:
 
 '/api/v1/getTicketStatus' - to get ticket status (CLOSED/OPEN) based on seat number
 
@@ -26,3 +26,9 @@ Navigate to localhost:8000 and use the below mentioned end points for the apis:
 'api/v1/updateTicketInfo' - to update ticket info with given parameters
 
 '/api/v1/openAllTickets' - ----admin only functionality---- to open up all the tickets
+
+-----tests------
+tests are written using jest and supertest.
+For running the tests initialize the local mongodb instance.
+Run the command 'npm run test' from the project root directory.
+The tests use a test collection in the mongoDB with mock data for the tests and drop the collection once the tests are done.

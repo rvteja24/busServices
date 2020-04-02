@@ -19,7 +19,7 @@ exports.getStatus = (req, res) => {
                     if (req.query.seatNumber != null && req.query.seatNumber.length > 0 && Number.isInteger(JSON.parse(req.query.seatNumber))) {
                         client.connect(function (err, db) {
                             if (err) throw err;
-                            console.log("connected!");
+                            //console.log("connected!");
                             var dbo = db.db(config.databaseName);
                             var seatNumberValue = JSON.parse(req.query.seatNumber);
                             dbo.collection(config.collectionName).findOne({ seatNumber: seatNumberValue }, function (err, result) {
@@ -68,12 +68,13 @@ exports.getAllClosedTickets = (req, res) => {
                 if (result != null) {
                     client.connect(function (err, db) {
                         if (err) throw err;
-                        console.log("connected!");
+                        //console.log("connected!");
                         var dbo = db.db(config.databaseName);
                         dbo.collection(config.collectionName).find({ ticketStatus: "CLOSED" }).toArray().then(result => {
                             if (err) throw err;
                             if (result.length > 0) {
-                                console.log(result)
+                                //console.log(result)
+                                delete result._id;
                                 res.send(result);
                             }
                             else {
@@ -111,12 +112,13 @@ exports.getAllOpenTickets = (req, res) => {
                 if (result != null) {
                     client.connect(function (err, db) {
                         if (err) throw err;
-                        console.log("connected!");
+                        //console.log("connected!");
                         var dbo = db.db(config.databaseName);
                         dbo.collection(config.collectionName).find({ ticketStatus: "OPEN" }).toArray().then(result => {
                             if (err) throw err;
                             if (result.length > 0) {
-                                console.log(result)
+                                //console.log(result)
+                                delete result._id;
                                 res.send(result);
                             }
                             else {
@@ -155,13 +157,13 @@ exports.getTicketinfo = (req, res) => {
                     if (req.query.seatNumber != null && req.query.seatNumber.length > 0 && Number.isInteger(JSON.parse(req.query.seatNumber))) {
                         client.connect(function (err, db) {
                             if (err) throw err;
-                            console.log("connected!");
+                            //console.log("connected!");
                             var dbo = db.db(config.databaseName);
-                            //need to add filter based on mobile number
                             var seatNumberValue = JSON.parse(req.query.seatNumber);
                             dbo.collection(config.collectionName).findOne({ seatNumber: seatNumberValue }, function (err, result) {
                                 if (err) throw err;
                                 if (result != null) {
+                                    delete result._id;
                                     res.send(result);
                                 }
                                 else {
@@ -278,7 +280,7 @@ exports.updateTicketInfo = (req, res) => {
                         else {
                             client.connect(function (err, db) {
                                 if (err) throw err;
-                                console.log("connected!");
+                                //console.log("connected!");
                                 var dbo = db.db(config.databaseName);
                                 var seatNumberValue = req.body.seatNumber;
                                 var replacementTicket = req.body;
